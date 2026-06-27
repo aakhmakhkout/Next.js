@@ -7,7 +7,7 @@ const filePath = async({params}) => {
     console.log(filePath)
   return (
     <div>
-        file = /{filePath.join("/")}
+        file = /{filePath?.join("/")}
     </div>
   )
 }
