@@ -17,5 +17,5 @@ const blogs = () => {
     </div>
   )
 }
- 
+  
 export default blogs
