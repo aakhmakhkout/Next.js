@@ -4,8 +4,7 @@ import React from 'react'
 const page = () => {
   return (
     <div className='flex w-full h-screen justify-center items-center flex-col gap-5'>
-      <h1 className='font-bold text-7xl'>Home Page</h1>
-      <p className='bg-gray-700 p-[8px_15px] rounded-lg border border-white/20'><Link href="/files">Files</Link></p>
+      <h1 className='font-bold text-7xl'>Files Page</h1>
     </div>
   )
 }
