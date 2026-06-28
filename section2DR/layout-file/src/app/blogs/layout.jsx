@@ -1,5 +1,5 @@
 import React from 'react'
-import Sidebar from './sidebar/page.jsx'
+import Sidebar from './components/Sidebar.jsx'
 
 export default function layout({children}) {
   return (
