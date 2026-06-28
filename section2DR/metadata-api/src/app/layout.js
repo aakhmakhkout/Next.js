@@ -1,7 +1,10 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Meta Data API",
+  title: {
+    template : "%s | Shoes Store",
+    default: "SHOES STORE"
+  },
   description: "learning next.js",
 };
 
