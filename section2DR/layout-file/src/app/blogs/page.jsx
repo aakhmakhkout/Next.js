@@ -1,9 +1,11 @@
+import Link from 'next/link'
 import React from 'react'
+import Sidebar from './sidebar/page.jsx'
 
 export default function blogs() {
   return (
-    <div className='flex justify-center items-center'>
-        <h1 className='font-bold text-7xl'>Blogs Page</h1>
+    <div>
+        
     </div>
   )
 }
