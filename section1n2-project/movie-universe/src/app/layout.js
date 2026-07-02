@@ -21,18 +21,16 @@ export default function RootLayout({ children }) {
         <section className="w-[8%]">
           <Sidebar />
         </section>
-        <main className="w-full">
+        <main className="w-full overflow-x-hidden">
         <header className="w-full">
           <Navbar />
         </header>
 
-          <section>
+          <section className="ml-1">
           {children}
           </section>
 
-          <footer>
-            <Footer />
-          </footer>
+         
         </main>
         </body>
     </html>

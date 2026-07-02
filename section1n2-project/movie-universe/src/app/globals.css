@@ -9,9 +9,13 @@ body {
   color: white;
 }
 
-.sidetabs:hover > h1 {
+.sidetabs:hover  h1 {
   opacity: 1;
 }
-.sidetabs:hover > .links {
+.sidetabs:hover  .links {
   color: #7b5bf5;
+}
+
+.Cards::-webkit-scrollbar {
+  display: none;
 }

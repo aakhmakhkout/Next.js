@@ -38,7 +38,7 @@ export default function Sidebar() {
     },
   ]
   return (
-    <div className="flex flex-col items-center gap-10">
+    <div className="flex flex-col items-center gap-10 sticky top-0">
       <div className="w-35 h-20">
         <Image src={logo} alt="logo" className="w-40"/>
       </div>
