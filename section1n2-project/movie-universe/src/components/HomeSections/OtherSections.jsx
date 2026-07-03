@@ -14,7 +14,7 @@ export default function OtherSections({data}) {
 
       <div className='flex gap-10 overflow-x-scroll Cards'>
       {data.data.map((items)=> {
-        return <Link key={items.id} href={`${data.path}/${items.title}`} className='w-50 h-90 flex flex-col gap-2 cursor-pointer group/Card outline-none'>
+        return <Link key={items.id} href={`${data.path}/${items.slug}`} className='w-50 h-90 flex flex-col gap-2 cursor-pointer group/Card outline-none'>
           <div className='w-50 h-75 overflow-hidden rounded-xl group-hover/Card:border'>
             <Image src={items.cover} alt={items.title} className='w-full h-full'/>
           </div>
