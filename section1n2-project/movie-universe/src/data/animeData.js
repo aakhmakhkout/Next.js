@@ -1,6 +1,6 @@
 import aotbg from "@/assets/detailsbg/aotbg.jpeg"
 
-export const animeData = [
+export const moviesData = [
     {
         id:1,
         title: "Attack On Titan",
