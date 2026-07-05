@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const About = () => {
+  console.log("about page")
   return (
     <>
        <nav>

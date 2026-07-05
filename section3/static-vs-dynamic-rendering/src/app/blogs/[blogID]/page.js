@@ -3,6 +3,7 @@ import Link from "next/link"
 
 export default async function page({params}) {
     const {blogID} =  await params
+    console.log("Blog ID = ", blogID)
   return (
     <>
       <nav>
