@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from "next/link"
 
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   // return [
   //   {blogID: "1"},
