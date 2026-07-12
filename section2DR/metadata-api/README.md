@@ -1,36 +1,208 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Metadata API
 
-## Getting Started
+## What is Metadata?
 
-First, run the development server:
+The Metadata API in Next.js is used to manage the information shown about a webpage, such as the page title, description, icons, Open Graph data, and more.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+It helps browsers and search engines understand what a page is about.
+
+---
+
+## Why do we need Metadata?
+
+Without Metadata
+
+```
+Browser Tab
+
+↓
+
+Untitled
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+With Metadata
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+Browser Tab
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+↓
 
-## Learn More
+Movie Universe | Popular Movies
+```
 
-To learn more about Next.js, take a look at the following resources:
+It also improves SEO and provides better previews when sharing links on social media.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Static Metadata
 
-## Deploy on Vercel
+Metadata can be added using the `metadata` object.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```jsx
+export const metadata = {
+  title: "Home",
+  description: "Welcome to Movie Universe",
+};
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Used when the metadata is the same every time.
+
+---
+
+## Dynamic Metadata
+
+Sometimes the title depends on the current page.
+
+Example
+
+```
+/movies/interstellar
+
+↓
+
+Title
+
+Interstellar | Movie Universe
+```
+
+This is done using
+
+```jsx
+generateMetadata();
+```
+
+which generates metadata based on the current route.
+
+---
+
+## Title Template
+
+Instead of writing
+
+```
+Home | Movie Universe
+
+About | Movie Universe
+
+Movies | Movie Universe
+```
+
+again and again, we can use
+
+```jsx
+title: {
+    default: "Movie Universe",
+    template: "%s | Movie Universe"
+}
+```
+
+Now every page automatically follows the same format.
+
+---
+
+## Default Title
+
+Used when a page doesn't provide its own title.
+
+Example
+
+```jsx
+default: "Movie Universe"
+```
+
+If no page title is specified,
+
+Browser Tab
+
+```
+Movie Universe
+```
+
+---
+
+## Absolute Title
+
+Sometimes we don't want to use the template.
+
+Example
+
+```
+404 Not Found
+```
+
+instead of
+
+```
+404 Not Found | Movie Universe
+```
+
+For this we use
+
+```jsx
+absolute;
+```
+
+which ignores the template completely.
+
+---
+
+## Description
+
+The description tells search engines and social media what the page is about.
+
+Example
+
+```jsx
+description: "Browse popular movies, series and anime.";
+```
+
+It is mainly used for
+
+- SEO
+- Google Search Results
+- Link Preview
+
+It is usually not visible directly on the webpage.
+
+---
+
+## My Biggest Confusions
+
+### Description
+
+I thought
+
+> Description changes something on the webpage.
+
+Not true.
+
+It is mainly used by search engines and when sharing links.
+
+---
+
+### Absolute
+
+I thought
+
+> Absolute adds another title.
+
+Actually,
+
+It simply ignores the parent's title template and uses only the title you provide.
+
+---
+
+## Benefits
+
+- Better SEO
+- Better Browser Tabs
+- Better Social Media Preview
+- Dynamic Titles
+- Consistent Title Format
+- Easier Metadata Management
+
+---
+
+## Final Understanding
+
+The Metadata API in Next.js provides a simple way to manage page information such as titles, descriptions, and other SEO-related data. It supports both static and dynamic metadata, allowing pages to automatically generate information based on the current route. Features like `template`, `default`, and `absolute` help maintain consistent page titles while still allowing exceptions when needed.

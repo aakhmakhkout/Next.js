@@ -1,36 +1,147 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nested Dynamic Routing
 
-## Getting Started
+## What is Nested Dynamic Routing?
 
-First, run the development server:
+Nested Dynamic Routing is used when a dynamic route itself contains another dynamic route.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+It allows us to create hierarchical URLs where each dynamic segment represents different data.
+
+---
+
+## How Nested Dynamic Routing Works
+
+Example folder structure
+
+```
+app
+│
+└── blogs
+    └── [blog]
+        └── [section]
+            └── page.jsx
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Generated Routes
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+/blogs/react/introduction
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+/blogs/react/hooks
 
-## Learn More
+/blogs/nextjs/routing
 
-To learn more about Next.js, take a look at the following resources:
+/blogs/javascript/arrays
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The first dynamic folder represents the blog, while the second represents a specific section of that blog.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Accessing Dynamic Values
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Both values are available through the `params` object.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```jsx
+export default async function Page({ params }) {
+  const { blog, section } = await params;
+
+  return (
+    <>
+      <h1>{blog}</h1>
+      <h2>{section}</h2>
+    </>
+  );
+}
+```
+
+For
+
+```
+/blogs/react/hooks
+```
+
+`params`
+
+```js
+{
+    blog: "react",
+    section: "hooks"
+}
+```
+
+---
+
+## Why do we need Nested Dynamic Routing?
+
+Without Nested Dynamic Routing
+
+```
+blogs
+
+├── react-hooks
+
+├── react-introduction
+
+├── nextjs-routing
+
+├── javascript-arrays
+```
+
+Every combination would need a separate route.
+
+With Nested Dynamic Routing
+
+```
+blogs
+
+└── [blog]
+    └── [section]
+```
+
+One route structure handles every blog and its sections.
+
+---
+
+## React vs Next.js
+
+### React
+
+Nested dynamic routes are created manually.
+
+```jsx
+<Route path="/blogs/:blog/:section" />
+```
+
+Dynamic values are accessed using
+
+```jsx
+useParams();
+```
+
+---
+
+### Next.js
+
+Create nested dynamic folders.
+
+```
+[blog]
+
+↓
+
+[section]
+```
+
+Access values using
+
+```jsx
+params.blog;
+
+params.section;
+```
+
+---
+
+## Final Understanding
+
+Nested Dynamic Routing extends Dynamic Routing by allowing multiple dynamic segments in a URL. Each dynamic folder captures its own part of the URL through the `params` object, making it easy to build hierarchical pages such as blog sections, product details, movie information, user profiles, or any multi-level content while reusing the same page structure.

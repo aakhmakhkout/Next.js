@@ -1,36 +1,242 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js - Dynamically Rendering Static Pages
 
-## Getting Started
+## What is it?
 
-First, run the development server:
+By default, Next.js tries to make every page **Static** because static pages are faster and don't need to be rendered on every request.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+But sometimes we need the page to use request-specific data like
+
+- Cookies
+- Search Parameters
+- Headers
+
+In these cases, we have to convert the page into a **Dynamic Page**.
+
+---
+
+## Why do we need it?
+
+Suppose I have
+
+```jsx
+About Page
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Normally this page can be Static.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+But tomorrow I want
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- User Theme
+- Logged In User
+- Search Filters
+- Language from Cookies
 
-## Learn More
+Now the page depends on **who is visiting**.
 
-To learn more about Next.js, take a look at the following resources:
+Static HTML cannot know this during build.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+So the page must become Dynamic.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Different Ways
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 1. Force Dynamic
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```jsx
+export const dynamic = "force-dynamic";
+```
+
+Always render this page on every request.
+
+Even if Next.js thinks it can be static.
+
+---
+
+### 2. searchParams
+
+```jsx
+export default async function Page({ searchParams }) {
+  const params = await searchParams;
+}
+```
+
+Using `async` + `await searchParams` tells Next.js
+
+> This page depends on request data.
+
+↓
+
+Dynamic Page.
+
+---
+
+### 3. cookies()
+
+```jsx
+import { cookies } from "next/headers";
+
+const cookieStore = await cookies();
+```
+
+Cookies are different for every user.
+
+So Next.js automatically makes the page Dynamic.
+
+---
+
+## dynamic Options
+
+### auto (Default)
+
+```jsx
+export const dynamic = "auto";
+```
+
+Next.js decides automatically.
+
+If it finds Dynamic APIs like
+
+- cookies()
+- headers()
+- searchParams
+
+↓
+
+Dynamic
+
+Otherwise
+
+↓
+
+Static
+
+---
+
+### force-static
+
+```jsx
+export const dynamic = "force-static";
+```
+
+Force the page to stay Static.
+
+Even if I use
+
+```jsx
+cookies();
+
+searchParams;
+```
+
+they return empty values because Static pages cannot use request-specific data.
+
+---
+
+### error
+
+```jsx
+export const dynamic = "error";
+```
+
+Used when I want the page to **always remain Static**.
+
+If someone accidentally uses
+
+- cookies()
+- searchParams
+- headers()
+
+↓
+
+Build fails with an error.
+
+Useful in big projects where Static rendering should never be broken.
+
+---
+
+## My Biggest Confusion
+
+I thought
+
+> Why don't we simply make every page Dynamic?
+
+Because Dynamic Rendering means
+
+```
+Request
+
+↓
+
+Render Page
+
+↓
+
+Generate HTML
+
+↓
+
+Send
+```
+
+for **every request**.
+
+This increases server work.
+
+Next.js prefers Static Rendering because it is
+
+- Faster
+- Better for SEO
+- Less Server Load
+- Better Performance
+
+Only make a page Dynamic when it actually needs request-specific data.
+
+---
+
+## React vs Next.js
+
+### React
+
+Everything is rendered on the client.
+
+There is no concept of
+
+- Static
+- Dynamic
+
+Every page behaves the same.
+
+---
+
+### Next.js
+
+Next.js first asks
+
+```
+Can I make this page Static?
+
+↓
+
+Yes
+
+↓
+
+Static Page
+
+↓
+
+No
+
+↓
+
+Dynamic Page
+```
+
+Static is always preferred.
+
+---
+
+## Final Understanding
+
+Next.js automatically tries to make pages **Static** because they are faster and require less server work. When a page depends on request-specific data such as cookies, search parameters, or headers, it must become **Dynamic** so the server can generate fresh HTML for each request. Developers can control this behavior using `dynamic = "force-dynamic"`, `force-static`, `error`, or leave it as `auto`, allowing Next.js to choose the best rendering strategy automatically.

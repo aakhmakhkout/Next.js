@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Custom Not Found Page
 
-## Getting Started
+Implemented a custom `not-found.jsx` page to handle invalid routes and improve the user experience instead of showing the default Next.js 404 page.
 
-First, run the development server:
+I used `notFound()` from `next/navigation` to manually redirect users whenever an invalid category, movie, or dynamic URL was accessed. For example, if a user entered a movie name or category that didn't exist in my data, the page automatically displayed the custom 404 page.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This helped me understand how Next.js handles invalid dynamic routes and how custom error pages can be integrated into the App Router.
+
+### Example
+
+```jsx
+import { notFound } from "next/navigation";
+
+if (!movie) {
+  notFound();
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Examples
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+/popularmovies/interstellar      ✅ Valid
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+/popularmovies/randommovie       ❌ Custom 404
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+/anime/xyz                       ❌ Custom 404
+```

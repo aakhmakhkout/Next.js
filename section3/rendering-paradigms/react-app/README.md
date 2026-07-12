@@ -1,16 +1,91 @@
-# React + Vite
+# React - Client Side Rendering (CSR)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What is CSR?
 
-Currently, two official plugins are available:
+Client Side Rendering (CSR) is the rendering strategy used by React by default.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The browser downloads the JavaScript first, then React executes the code inside the browser and creates the HTML.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Rendering Flow
 
-## Expanding the ESLint configuration
+```
+User visits Website
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+↓
+
+Browser requests files
+
+↓
+
+Server sends
+
+- index.html
+- CSS
+- JavaScript
+
+↓
+
+Browser downloads JS
+
+↓
+
+React executes
+
+↓
+
+HTML is created
+
+↓
+
+Webpage becomes visible
+```
+
+---
+
+## How React works
+
+Initially, React only receives
+
+```html
+<div id="root"></div>
+```
+
+Then
+
+```jsx
+main.jsx;
+```
+
+mounts the application
+
+```jsx
+createRoot(document.getElementById("root")).render(<App />);
+```
+
+From there React renders every component inside the browser.
+
+---
+
+## Advantages
+
+- Highly Interactive
+- Fast page navigation after first load
+- Great for Dashboards
+- Rich UI
+
+---
+
+## Disadvantages
+
+- Initial loading can be slower
+- Browser must download JavaScript first
+- SEO is weaker compared to SSR
+- Blank page until JavaScript executes
+
+---
+
+## Final Understanding
+
+React uses Client Side Rendering by default. The server only sends the HTML shell and JavaScript files. The browser downloads the JavaScript, executes React, creates the HTML, and displays the webpage. Almost all rendering happens inside the browser.

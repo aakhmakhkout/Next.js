@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dynamic Routing
 
-## Getting Started
+## What is Dynamic Routing?
 
-First, run the development server:
+Dynamic Routing allows us to create a **single page** that can handle multiple URLs by using dynamic route segments instead of creating separate pages for each route.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+It is useful when the page structure is the same, but the content changes based on the URL.
+
+---
+
+## How Dynamic Routing Works
+
+A dynamic route is created by wrapping the folder name inside square brackets.
+
+Example
+
+```
+app
+│
+└── blogs
+    └── [blog]
+        └── page.jsx
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Generated Routes
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+/blogs/react
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+/blogs/nextjs
 
-## Learn More
+/blogs/javascript
+```
 
-To learn more about Next.js, take a look at the following resources:
+All these URLs use the **same `page.jsx`**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Accessing Dynamic Values
 
-## Deploy on Vercel
+The dynamic value is accessed using the `params` object.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```jsx
+export default async function Page({ params }) {
+  const { blog } = await params;
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  return <h1>{blog}</h1>;
+}
+```
+
+For
+
+```
+/blogs/react
+```
+
+`params`
+
+```js
+{
+  blog: "react";
+}
+```
+
+---
+
+## Why do we need Dynamic Routing?
+
+Without Dynamic Routing
+
+```
+blogs
+
+├── react
+
+├── nextjs
+
+├── javascript
+
+├── html
+
+├── css
+```
+
+Every blog would require its own folder and page.
+
+With Dynamic Routing
+
+```
+blogs
+
+└── [blog]
+```
+
+One page handles every blog.
+
+---
+
+## Validation
+
+Since users can enter anything in the URL, it's common to validate the dynamic value.
+
+Example
+
+```jsx
+if (!blogs.includes(blog)) {
+  notFound();
+}
+```
+
+If the route doesn't exist, display the custom 404 page.
+
+---
+
+## React vs Next.js
+
+### React
+
+Dynamic routes are created manually.
+
+```jsx
+<Route path="/blogs/:blog" element={<Blog />} />
+```
+
+Dynamic values are accessed using
+
+```jsx
+useParams();
+```
+
+---
+
+### Next.js
+
+Dynamic routes are created using folders.
+
+```
+[blog]
+```
+
+Dynamic values are accessed using
+
+```jsx
+params;
+```
+
+No extra routing library is needed.
+
+---
+
+## Final Understanding
+
+Dynamic Routing allows a single page to render different content based on the URL. Instead of creating separate pages for every item, Next.js uses dynamic folders (e.g., `[blog]`) and provides the current URL segment through the `params` object. This makes the application more scalable, easier to maintain, and ideal for pages like blogs, products, movies, or user profiles.
