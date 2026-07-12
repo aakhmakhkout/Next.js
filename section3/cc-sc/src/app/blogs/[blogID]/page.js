@@ -1,4 +1,3 @@
-import React, { Suspense } from "react";
 import Link from "next/link";
 import Likes from "../../../../components/Likes";
 
