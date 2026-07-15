@@ -31,7 +31,7 @@ The goal of this repository is not just to finish a course, but to understand **
 |    17 | Static Site Generation (SSG)                    | Excellent       | Frontend           | ✅ Completed |
 |    18 | Incremental Static Regeneration (ISR)           | Excellent       | Frontend           | ✅ Completed |
 |    19 | Server Components vs Client Components          | Not Negotiable  | Frontend           | ✅ Completed |
-|    20 | Hydration                                       | Excellent       | Frontend           |  ⏳ Pending  |
+|    20 | Hydration                                       | Excellent       | Frontend           | ✅ Completed |
 |    21 | Hydration Errors                                | Excellent       | Frontend           |  ⏳ Pending  |
 |    22 | Data Fetching in App Router                     | Not Negotiable  | Frontend           |  ⏳ Pending  |
 |    23 | Fetching Data with React Server Components      | Excellent       | Frontend           |  ⏳ Pending  |
