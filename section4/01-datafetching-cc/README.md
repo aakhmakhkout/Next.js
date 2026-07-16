@@ -1,36 +1,301 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Data Fetching in Client Components
 
-## Getting Started
+## What is Client-side Data Fetching?
 
-First, run the development server:
+Client-side data fetching is the same approach we use in React.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+We make the component a Client Component using
+
+```jsx
+"use client";
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then we use
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- `useState()` → Store the fetched data.
+- `useEffect()` → Fetch data after the component loads.
+- `fetch()` → Get data from an API.
+- `setState()` → Update the UI with the received data.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Basic Flow
 
-To learn more about Next.js, take a look at the following resources:
+```
+Browser loads page
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+↓
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Hydration completes
 
-## Deploy on Vercel
+↓
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+useEffect() runs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+↓
+
+Fetch Data
+
+↓
+
+setState(data)
+
+↓
+
+React re-renders
+
+↓
+
+Updated UI
+```
+
+---
+
+## Basic Structure
+
+```jsx
+"use client";
+
+const [posts, setPosts] = useState([]);
+
+useEffect(() => {
+    async function getPosts() {
+        const res = await fetch(...);
+        const data = await res.json();
+
+        setPosts(data);
+    }
+
+    getPosts();
+}, []);
+```
+
+---
+
+## My Biggest Confusion
+
+I already learned hydration.
+
+React compares
+
+```
+Real DOM
+
+↓
+
+Virtual DOM
+```
+
+But here I was fetching data after hydration.
+
+So I wondered
+
+> If my server only renders
+
+```
+<h1>Posts</h1>
+```
+
+and later React renders
+
+```
+<h1>Posts</h1>
+
+<p>React</p>
+
+<p>Next.js</p>
+```
+
+Why doesn't React throw a Hydration Error?
+
+---
+
+## What I Understood
+
+The important thing is
+
+**Hydration only compares the very first render.**
+
+When the server renders
+
+```jsx
+const [posts] = useState([]);
+```
+
+the state is still
+
+```jsx
+[];
+```
+
+because `useEffect()` never runs on the server.
+
+So the server generates
+
+```
+<h1>Posts</h1>
+```
+
+---
+
+When the browser starts React
+
+`useEffect()` still hasn't executed.
+
+So React also sees
+
+```jsx
+posts = [];
+```
+
+and creates
+
+```
+<h1>Posts</h1>
+```
+
+Both outputs are identical.
+
+↓
+
+Hydration succeeds.
+
+Only **after hydration** does `useEffect()` run, fetch the data, update the state, and React performs a normal re-render.
+
+So this is **not hydration anymore**, it is normal React rendering.
+
+---
+
+## Another Confusion
+
+I wondered
+
+> If `posts` is a `useState`, why does the server even check it?
+
+I thought Client Components only run in the browser.
+
+---
+
+## What I Understood
+
+A Client Component is **still rendered once on the server** to generate the initial HTML.
+
+The server can execute things like
+
+```jsx
+const [posts] = useState([]);
+```
+
+because the initial value is already known.
+
+The server **cannot** execute
+
+- `useEffect()`
+- Browser APIs (`window`, `document`, `localStorage`)
+- Event Listeners
+
+Those only run after the browser loads the page.
+
+---
+
+## Rendering Flow
+
+```
+Next.js Server
+
+↓
+
+Client Component executes once
+
+↓
+
+posts = []
+
+↓
+
+Generate HTML
+
+↓
+
+Browser receives HTML
+
+↓
+
+React Hydrates
+
+↓
+
+useEffect() runs
+
+↓
+
+Fetch Data
+
+↓
+
+setPosts()
+
+↓
+
+React Re-renders
+
+↓
+
+UI Updates
+```
+
+---
+
+## Hydration vs React Update
+
+### During Hydration
+
+```
+Real DOM
+
+↓
+
+Virtual DOM
+
+↓
+
+Compare
+```
+
+No fetched data yet.
+
+---
+
+### After Hydration
+
+```
+useEffect()
+
+↓
+
+Fetch Data
+
+↓
+
+setState()
+
+↓
+
+Old Virtual DOM
+
+↓
+
+New Virtual DOM
+
+↓
+
+Update Real DOM
+```
+
+Now React behaves exactly like a normal React application.
+
+---
+
+## Final Understanding
+
+Client-side data fetching in Next.js works exactly like React. We use `useState()` to store the data and `useEffect()` to fetch it after the page loads. During hydration, both the server and browser render the component using the same initial state, so the generated HTML matches and no hydration error occurs. Only after hydration is complete does `useEffect()` execute, fetch the latest data, update the state, and trigger a normal React re-render to display the fetched content.
