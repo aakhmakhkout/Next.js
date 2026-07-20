@@ -1,36 +1,335 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Loading States using Suspense
 
-## Getting Started
+## What is Suspense?
 
-First, run the development server:
+`<Suspense>` is a React feature that allows us to show a loading UI for **specific components** instead of the entire page.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+In Next.js, Suspense is commonly used with Server Components that fetch data.
+
+Instead of making the whole page wait, only the slow component waits.
+
+---
+
+## Why do we use Suspense?
+
+Before learning Suspense, I learned about `loading.jsx`.
+
+`loading.jsx` provides a loading UI for the **entire route segment**.
+
+This means if one component is slow, the whole route waits.
+
+Example
+
+```
+Posts Page
+
+├── Header
+├── Sidebar
+├── Posts
+└── Footer
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If the Posts section takes 5 seconds to fetch data,
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+the user sees
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+Loading...
+```
 
-## Learn More
+until the whole route is ready.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Problem with loading.jsx
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Suppose
 
-## Deploy on Vercel
+```
+Header
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+↓
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ready
+
+Sidebar
+
+↓
+
+Ready
+
+Posts
+
+↓
+
+5 seconds
+
+Footer
+
+↓
+
+Ready
+```
+
+Even though Header, Sidebar and Footer are already ready,
+
+the user still has to wait because the route is treated as one unit.
+
+---
+
+## Solution: Suspense
+
+With Suspense, we divide the slow parts of the page into separate components.
+
+Example
+
+```
+Posts Page
+
+├── Header
+├── Sidebar
+├── LatestPosts
+└── PopularPosts
+```
+
+Now we wrap only the slow components.
+
+```jsx
+import { Suspense } from "react";
+
+export default function Page() {
+  return (
+    <>
+      <Header />
+
+      <Sidebar />
+
+      <Suspense fallback={<Loading />}>
+        <LatestPosts />
+      </Suspense>
+
+      <Suspense fallback={<Loading />}>
+        <PopularPosts />
+      </Suspense>
+    </>
+  );
+}
+```
+
+---
+
+## Rendering Flow
+
+```
+User requests page
+
+↓
+
+Next.js starts rendering
+
+↓
+
+Header is ready
+
+↓
+
+Header appears
+
+↓
+
+Sidebar is ready
+
+↓
+
+Sidebar appears
+
+↓
+
+LatestPosts is fetching
+
+↓
+
+Show Loading...
+
+↓
+
+PopularPosts is fetching
+
+↓
+
+Show Loading...
+
+↓
+
+LatestPosts finishes
+
+↓
+
+LatestPosts appears
+
+↓
+
+PopularPosts finishes
+
+↓
+
+PopularPosts appears
+```
+
+Instead of waiting for everything,
+
+each component appears as soon as it is ready.
+
+---
+
+## Component-based Loading
+
+One thing I learned is that Suspense provides **component-based loading**.
+
+Instead of making the whole page wait,
+
+we divide our page into smaller components.
+
+Those components can fetch their own data independently.
+
+Then we wrap only those components with
+
+```jsx
+<Suspense>
+```
+
+This makes the page feel much faster because other parts of the page are already visible.
+
+---
+
+## Fallback
+
+Suspense displays a fallback UI while waiting.
+
+Example
+
+```jsx
+<Suspense fallback={<Loading />}>
+  <Posts />
+</Suspense>
+```
+
+While `Posts` is rendering,
+
+the user sees
+
+```
+Loading...
+```
+
+Once rendering finishes,
+
+the actual component replaces the fallback.
+
+---
+
+## loading.jsx vs Suspense
+
+### loading.jsx
+
+```
+Whole Route
+
+↓
+
+Loading
+
+↓
+
+Whole Route Appears
+```
+
+Only after the entire route segment is ready does the page appear.
+
+---
+
+### Suspense
+
+```
+Header
+
+↓
+
+Visible
+
+Sidebar
+
+↓
+
+Visible
+
+Posts
+
+↓
+
+Loading...
+
+↓
+
+Visible
+
+Reviews
+
+↓
+
+Loading...
+
+↓
+
+Visible
+```
+
+Each component can finish independently.
+
+---
+
+## My Initial Understanding
+
+I thought
+
+> We use Suspense because loading.jsx holds the whole page until rendering is completed.
+
+---
+
+## What I Understood
+
+That is mostly correct.
+
+A more accurate explanation is
+
+`loading.jsx` provides loading UI for an **entire route segment**, while Suspense provides loading UI for **individual components or subtrees**.
+
+This allows different parts of the page to render independently.
+
+---
+
+## Important Note
+
+Suspense is **not specifically for API requests**.
+
+It is used for asynchronous rendering.
+
+Many Server Components fetch data, so Suspense is commonly used around them, but it can be used for any component that suspends while rendering.
+
+---
+
+## Things I Learned
+
+- Suspense is a React feature.
+- Next.js supports Suspense out of the box.
+- Suspense provides component-level loading.
+- `loading.jsx` provides route-level loading.
+- Each Suspense boundary has its own fallback UI.
+- Different components can finish rendering independently.
+- Users can interact with the parts of the page that are already ready instead of waiting for the whole page.
+
+---
+
+## Final Understanding
+
+`loading.jsx` and `<Suspense>` are both used to display loading UIs, but they work at different levels. `loading.jsx` handles loading for an entire route segment, while `<Suspense>` handles loading for individual components. By splitting a page into smaller components and wrapping only the slow ones with `<Suspense>`, Next.js can display the rest of the page immediately while showing a fallback UI only where it's needed. This results in a faster and smoother user experience.
