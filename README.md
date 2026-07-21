@@ -33,8 +33,8 @@ The goal of this repository is not just to finish a course, but to understand **
 |    19 | Server Components vs Client Components          | Not Negotiable  | Frontend           | ✅ Completed |
 |    20 | Hydration                                       | Excellent       | Frontend           | ✅ Completed |
 |    21 | Hydration Errors                                | Excellent       | Frontend           | ✅ Completed |
-|    22 | Data Fetching in App Router                     | Not Negotiable  | Frontend           |  ⏳ Pending  |
-|    23 | Fetching Data with React Server Components      | Excellent       | Frontend           |  ⏳ Pending  |
+|    22 | Data Fetching in App Router                     | Not Negotiable  | Frontend           | ✅ Completed |
+|    23 | Fetching Data with React Server Components      | Excellent       | Frontend           | ✅ Completed |
 |    24 | Managing State with React Hooks & Context       | Not Negotiable  | Frontend           |  ⏳ Pending  |
 |    25 | Integrating Redux                               | Excellent       | Frontend           |  ⏳ Pending  |
 |    26 | Error Handling with `error.js`                  | Excellent       | Frontend           |  ⏳ Pending  |
