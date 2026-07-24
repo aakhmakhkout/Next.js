@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 export default async function page() {
   const slowLoading = await fetch("https://procodrr.vercel.app/?sleep=4000");
   const data = await slowLoading.json();
