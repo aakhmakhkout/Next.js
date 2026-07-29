@@ -6,8 +6,8 @@ import Footer from "@/components/layout/Footer";
 import { getTrendingMovies } from "@/lib/tmdb/movies";
 
 export default async function page() {
-  const trending_movies = await getTrendingMovies();
-  console.log(trending_movies);
+  // const trending_movies = await getTrendingMovies();
+  // console.log(trending_movies);
   return (
     <div className="flex flex-col gap-10 overflow-hidden">
       <section>
