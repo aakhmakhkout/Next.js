@@ -26,6 +26,13 @@ export default function HeroSectionCards({ moviesList }) {
             Trending Movies
           </h1>
         </div>
+        <div>
+          <h1>name</h1>
+          <div>
+            <p>release date</p>
+            <p>genre</p>
+          </div>
+        </div>
       </div>
     </div>
   );
