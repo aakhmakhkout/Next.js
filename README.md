@@ -35,8 +35,8 @@ The goal of this repository is not just to finish a course, but to understand **
 |    21 | Hydration Errors                                | Excellent       | Frontend           | ✅ Completed |
 |    22 | Data Fetching in App Router                     | Not Negotiable  | Frontend           | ✅ Completed |
 |    23 | Fetching Data with React Server Components      | Excellent       | Frontend           | ✅ Completed |
-|    24 | Managing State with React Hooks & Context       | Not Negotiable  | Frontend           |  ⏳ Pending  |
-|    25 | Integrating Redux                               | Excellent       | Frontend           |  ⏳ Pending  |
+|    24 | Managing State with React Hooks & Context       | Not Negotiable  | Frontend           | ✅ Completed |
+|    25 | Integrating Redux                               | Excellent       | Frontend           | ✅ Completed |
 |    26 | Error Handling with `error.js`                  | Excellent       | Frontend           |  ⏳ Pending  |
 |    27 | Recovering from Errors                          | Good to Have    | Frontend           |  ⏳ Pending  |
 |    28 | Nested Route Error Handling                     | Good to Have    | Frontend           |  ⏳ Pending  |
