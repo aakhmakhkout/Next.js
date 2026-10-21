@@ -2,7 +2,7 @@ const Blog = async ({ params }) => {
   const { blogID } = await params;
 
   if (blogID % 2 === 0) {
-    throw new Error("BlogID should be odd number");
+    throw new Error("BlogID should be an odd number");
   }
 
   return (
