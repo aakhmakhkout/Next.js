@@ -1,0 +1,61 @@
+
+> 01-error.js@0.1.0 start
+> next start
+
+▲ Next.js 16.4.2
+- Local:         http://localhost:3000
+- Network:       http://10.37.150.44:3000
+✓ Ready in 220ms
+✓ Running next.config.mjs took 26ms
+⨯ ReferenceError: object is not defined
+    at c (C:\Users\aakhm\coding\Next.js\Sections\section5\01-error.js\.next\server\chunks\ssr\[root-of-the-server]__20wbeeikimcgl._.js:1:2886) {
+  digest: '745462739'
+}
+⨯ ReferenceError: object is not defined
+    at c (C:\Users\aakhm\coding\Next.js\Sections\section5\01-error.js\.next\server\chunks\ssr\[root-of-the-server]__20wbeeikimcgl._.js:1:2886) {
+  digest: '2886511219'
+}
+⨯ ReferenceError: object is not defined
+    at c (C:\Users\aakhm\coding\Next.js\Sections\section5\01-error.js\.next\server\chunks\ssr\[root-of-the-server]__20wbeeikimcgl._.js:1:2886) {
+  digest: '745462739'
+}
+⨯ ReferenceError: object is not defined
+    at c (C:\Users\aakhm\coding\Next.js\Sections\section5\01-error.js\.next\server\chunks\ssr\[root-of-the-server]__20wbeeikimcgl._.js:1:2886) {
+  digest: '2886511219'
+}
+⨯ ReferenceError: object is not defined
+    at c (C:\Users\aakhm\coding\Next.js\Sections\section5\01-error.js\.next\server\chunks\ssr\[root-of-the-server]__20wbeeikimcgl._.js:1:2886) {
+  digest: '745462739'
+}
+⨯ ReferenceError: object is not defined
+    at c (C:\Users\aakhm\coding\Next.js\Sections\section5\01-error.js\.next\server\chunks\ssr\[root-of-the-server]__20wbeeikimcgl._.js:1:2886) {
+  digest: '2886511219'
+}
+Terminate batch job (Y/N)? 
+^C
+> 01-error.js@0.1.0 start
+> next start
+
+▲ Next.js 16.4.2
+- Local:         http://localhost:3000
+- Network:       http://10.37.150.44:3000
+✓ Ready in 221ms
+✓ Running next.config.mjs took 29ms
+⨯ ReferenceError: object is not defined
+    at c (C:\Users\aakhm\coding\Next.js\Sections\section5\01-error.js\.next\server\chunks\ssr\[root-of-the-server]__20wbeeikimcgl._.js:1:2886) {
+  digest: '745462739'
+}
+⨯ ReferenceError: object is not defined
+    at c (C:\Users\aakhm\coding\Next.js\Sections\section5\01-error.js\.next\server\chunks\ssr\[root-of-the-server]__20wbeeikimcgl._.js:1:2886) {
+  digest: '2886511219'
+}
+⨯ ReferenceError: object is not defined
+    at c (C:\Users\aakhm\coding\Next.js\Sections\section5\01-error.js\.next\server\chunks\ssr\[root-of-the-server]__20wbeeikimcgl._.js:1:2886) {
+  digest: '745462739'
+}
+⨯ ReferenceError: object is not defined
+    at c (C:\Users\aakhm\coding\Next.js\Sections\section5\01-error.js\.next\server\chunks\ssr\[root-of-the-server]__20wbeeikimcgl._.js:1:2886) {
+  digest: '2886511219'
+}
+Terminate batch job (Y/N)? 
+^C
