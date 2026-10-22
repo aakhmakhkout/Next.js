@@ -1,8 +1,14 @@
 const Blog = async ({ params }) => {
   const { blogID } = await params;
 
-  if (blogID % 2 === 0) {
-    throw new Error("BlogID should be an odd number");
+  // if (blogID % 2 === 0) {
+  //   return <div>blogID should be an odd number</div>;
+  // }
+
+  const randomNumber = Math.random();
+  console.log(randomNumber);
+  if (randomNumber > 0.5) {
+    throw new Error("Number is greater than 0.5");
   }
 
   return (
