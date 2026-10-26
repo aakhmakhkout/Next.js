@@ -2,6 +2,11 @@ import Link from "next/link";
 
 const Blogs = () => {
   console.log("Blogs Page");
+  // const randomNumber = Math.random();
+  // console.log(randomNumber);
+  // if (randomNumber > 0.5) {
+  //   throw new Error("Number is greater than 0.5");
+  // }
   return (
     <>
       <div>
