@@ -39,8 +39,8 @@ The goal of this repository is not just to finish a course, but to understand **
 |    25 | Integrating Redux                               | Excellent       | Frontend           | ✅ Completed |
 |    26 | Error Handling with `error.js`                  | Excellent       | Frontend           | ✅ Completed |
 |    27 | Recovering from Errors                          | Good to Have    | Frontend           | ✅ Completed |
-|    28 | Nested Route Error Handling                     | Good to Have    | Frontend           |  ⏳ Pending  |
-|    29 | Client-side Exceptions                          | Good to Have    | Frontend           |  ⏳ Pending  |
+|    28 | Nested Route Error Handling                     | Good to Have    | Frontend           | ✅ Completed |
+|    29 | Client-side Exceptions                          | Good to Have    | Frontend           | ✅ Completed |
 |    30 | Global Error Handling                           | Good to Have    | Frontend           |  ⏳ Pending  |
 |    31 | CSS in Next.js                                  | Good to Have    | Frontend           |  ⏳ Pending  |
 |    32 | CSS Modules                                     | Good to Have    | Frontend           |  ⏳ Pending  |
