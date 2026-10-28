@@ -41,7 +41,7 @@ The goal of this repository is not just to finish a course, but to understand **
 |    27 | Recovering from Errors                          | Good to Have    | Frontend           | ✅ Completed |
 |    28 | Nested Route Error Handling                     | Good to Have    | Frontend           | ✅ Completed |
 |    29 | Client-side Exceptions                          | Good to Have    | Frontend           | ✅ Completed |
-|    30 | Global Error Handling                           | Good to Have    | Frontend           |  ⏳ Pending  |
+|    30 | Global Error Handling                           | Good to Have    | Frontend           | ✅ Completed |
 |    31 | CSS in Next.js                                  | Good to Have    | Frontend           |  ⏳ Pending  |
 |    32 | CSS Modules                                     | Good to Have    | Frontend           |  ⏳ Pending  |
 |    33 | SCSS                                            | Extra Knowledge | Frontend           |  ⏳ Pending  |
@@ -50,16 +50,16 @@ The goal of this repository is not just to finish a course, but to understand **
 |    36 | `next/image` Image Optimization                 | Not Negotiable  | Frontend           |  ⏳ Pending  |
 |    37 | Preparing App for Deployment                    | Excellent       | Frontend           |  ⏳ Pending  |
 |    38 | Environment Variables                           | Excellent       | Frontend           |  ⏳ Pending  |
-|    39 | Custom Domain Setup                             | Good to Know    | Frontend           |  ⏳ Pending  |
-|    40 | Middleware                                      | Good to Have    | Frontend           |  ⏳ Pending  |
-|    41 | Rewrites using `NextResponse`                   | Good to Have    | Frontend           |  ⏳ Pending  |
-|    42 | Edge Runtime                                    | Extra Knowledge | Frontend           |  ⏳ Pending  |
-|    43 | Internationalization (i18n)                     | Extra Knowledge | Frontend           |  ⏳ Pending  |
-|    44 | ESLint Deep Dive                                | Excellent       | Frontend           |  ⏳ Pending  |
-|    45 | ESLint as Formatter                             | Good to Have    | Frontend           |  ⏳ Pending  |
-|    46 | Prettier Setup                                  | Excellent       | Frontend           |  ⏳ Pending  |
-|    47 | Lint-Staged                                     | Extra Knowledge | Frontend           |  ⏳ Pending  |
-|    48 | Husky Pre-Commit Hooks                          | Extra Knowledge | Frontend           |  ⏳ Pending  |
+|    39 | Custom Domain Setup                             | Good to Know    | Frontend           |   Skipping   |
+|    40 | Middleware                                      | Good to Have    | Frontend           |   Skipping   |
+|    41 | Rewrites using `NextResponse`                   | Good to Have    | Frontend           |   Skipping   |
+|    42 | Edge Runtime                                    | Extra Knowledge | Frontend           |   Skipping   |
+|    43 | Internationalization (i18n)                     | Extra Knowledge | Frontend           |   Skipping   |
+|    44 | ESLint Deep Dive                                | Excellent       | Frontend           |   Skipping   |
+|    45 | ESLint as Formatter                             | Good to Have    | Frontend           |   Skipping   |
+|    46 | Prettier Setup                                  | Excellent       | Frontend           |   Skipping   |
+|    47 | Lint-Staged                                     | Extra Knowledge | Frontend           |   Skipping   |
+|    48 | Husky Pre-Commit Hooks                          | Extra Knowledge | Frontend           |   Skipping   |
 
 ---
 
