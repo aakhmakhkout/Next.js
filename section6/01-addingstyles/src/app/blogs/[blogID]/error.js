@@ -1,6 +1,5 @@
 "use client";
 
-// same error and error.js level -> layout intact
 import { useRouter } from "next/navigation";
 import { startTransition } from "react";
 
