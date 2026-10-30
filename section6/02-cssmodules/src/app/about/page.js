@@ -6,7 +6,7 @@ const About = () => {
   const [fruits, setfruits] = useState(["apple", "banana", "grapes"]);
   return (
     <div>
-      <h1>About Us</h1>
+      <h1 className="title">About Us</h1>
       <p>We are a company dedicated to providing quality services.</p>
 
       <button

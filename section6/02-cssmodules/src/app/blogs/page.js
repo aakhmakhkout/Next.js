@@ -1,5 +1,5 @@
 import Link from "next/link";
-import "./blog.css";
+// import "./blog.css";
 
 const Blogs = () => {
   console.log("Blogs Page");
@@ -7,7 +7,7 @@ const Blogs = () => {
   return (
     <>
       <div>
-        <h1>Welcome to Our Blog</h1>
+        <h1 className="title">Welcome to Our Blog</h1>
         <ol className="blog-links">
           <li>
             <Link href="/blogs/1">Blog 1</Link>
