@@ -1,36 +1,173 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎨 Adding CSS Styles in Next.js
 
-## Getting Started
+## 📌 Introduction
 
-First, run the development server:
+Next.js supports different ways of adding CSS to an application.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+We can use regular CSS files just like we do in React, but Next.js handles CSS loading and bundling based on the application structure.
+
+In this lecture, we learned how to import CSS files and how styles can affect multiple routes during client-side navigation.
+
+---
+
+## 1. 📄 Using CSS Files in Next.js
+
+We can create normal CSS files and import them into our components or layouts.
+
+**Example folder structure:**
+
+```text
+app/
+├── layout.jsx
+├── page.jsx
+├── globals.css
+│
+└── about/
+    ├── page.jsx
+    └── about.css
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Importing CSS
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+We can import a CSS file using a normal JavaScript import statement.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Example: `app/about/page.jsx`**
 
-## Learn More
+```jsx
+import "./about.css";
 
-To learn more about Next.js, take a look at the following resources:
+export default function About() {
+  return (
+    <div className="container">
+      <h1>About Page</h1>
+    </div>
+  );
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Example: `app/about/about.css`**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```css
+.container {
+  background-color: black;
+  color: white;
+  padding: 20px;
+}
+```
 
-## Deploy on Vercel
+Once imported, the CSS rules are included in the application's generated stylesheets.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 2. 🌍 Global CSS
+
+Global CSS contains styles that can affect elements across the application.
+
+We commonly use it for:
+
+- Body styling.
+- Default fonts.
+- Background colors.
+- CSS resets.
+- Common HTML element styles.
+
+**Example: `app/globals.css`**
+
+```css
+body {
+  margin: 0;
+  background-color: #111;
+  color: white;
+}
+
+h1 {
+  font-size: 32px;
+}
+```
+
+We generally import global CSS inside the root layout.
+
+**Example: `app/layout.jsx`**
+
+```jsx
+import "./globals.css";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+This makes the global styles available throughout the application.
+
+---
+
+## 3. ⚠️ Understanding CSS Loading During Navigation
+
+One important behaviour we learned is that importing a normal CSS file inside a route does not automatically make its styles isolated to that route.
+
+Consider this example:
+
+**Route A: `/about`**
+
+```jsx
+import "./about.css";
+
+export default function About() {
+  return <h1 className="title">About Page</h1>;
+}
+```
+
+**CSS: `about.css`**
+
+```css
+.title {
+  color: red;
+  font-size: 40px;
+}
+```
+
+**Route B: `/contact`**
+
+```jsx
+export default function Contact() {
+  return <h1 className="title">Contact Page</h1>;
+}
+```
+
+### What happens?
+
+1. We visit `/about`.
+2. Next.js loads the CSS file imported by the About route.
+3. We navigate to `/contact` using client-side navigation.
+4. The Contact page also contains the `.title` class.
+5. Since the CSS selector is global, the Contact page's heading can also receive the red color.
+
+**Why?**
+
+Because normal CSS selectors are not scoped to individual components or routes.
+
+A selector such as:
+
+```css
+.title {
+  color: red;
+}
+```
+
+targets every matching element in the document while that stylesheet is active.
+
+### Important observation
+
+CSS files imported by routes can remain loaded during client-side navigation. Therefore, styles may continue affecting other routes even after leaving the route where the CSS was originally imported.
+
+Refreshing the browser can produce a different result because the page and its required stylesheets are loaded again for the current route.
+
+However, this is not a guaranteed CSS cleanup mechanism. The exact stylesheet loading and removal behaviour can depend on Next.js bundling and navigation.
+
+---
+
+## 4. 🧠
