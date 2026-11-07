@@ -42,14 +42,14 @@ The goal of this repository is not just to finish a course, but to understand **
 |    28 | Nested Route Error Handling                     | Good to Have    | Frontend           | ✅ Completed |
 |    29 | Client-side Exceptions                          | Good to Have    | Frontend           | ✅ Completed |
 |    30 | Global Error Handling                           | Good to Have    | Frontend           | ✅ Completed |
-|    31 | CSS in Next.js                                  | Good to Have    | Frontend           |  ⏳ Pending  |
-|    32 | CSS Modules                                     | Good to Have    | Frontend           |  ⏳ Pending  |
-|    33 | SCSS                                            | Extra Knowledge | Frontend           |  ⏳ Pending  |
-|    34 | Tailwind CSS v4 Setup                           | Not Negotiable  | Frontend           |  ⏳ Pending  |
-|    35 | Tailwind CSS v4 in Existing Projects            | Excellent       | Frontend           |  ⏳ Pending  |
+|    31 | CSS in Next.js                                  | Good to Have    | Frontend           | ✅ Completed |
+|    32 | CSS Modules                                     | Good to Have    | Frontend           | ✅ Completed |
+|    33 | SCSS                                            | Extra Knowledge | Frontend           |   Skipping   |
+|    34 | Tailwind CSS v4 Setup                           | Not Negotiable  | Frontend           | ✅ Completed |
+|    35 | Tailwind CSS v4 in Existing Projects            | Excellent       | Frontend           | ✅ Completed |
 |    36 | `next/image` Image Optimization                 | Not Negotiable  | Frontend           |  ⏳ Pending  |
-|    37 | Preparing App for Deployment                    | Excellent       | Frontend           |  ⏳ Pending  |
-|    38 | Environment Variables                           | Excellent       | Frontend           |  ⏳ Pending  |
+|    37 | Preparing App for Deployment                    | Excellent       | Frontend           | ✅ Completed |
+|    38 | Environment Variables                           | Excellent       | Frontend           | ✅ Completed |
 |    39 | Custom Domain Setup                             | Good to Know    | Frontend           |   Skipping   |
 |    40 | Middleware                                      | Good to Have    | Frontend           |   Skipping   |
 |    41 | Rewrites using `NextResponse`                   | Good to Have    | Frontend           |   Skipping   |
