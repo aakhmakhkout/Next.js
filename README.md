@@ -47,7 +47,7 @@ The goal of this repository is not just to finish a course, but to understand **
 |    33 | SCSS                                            | Extra Knowledge | Frontend           |   Skipping   |
 |    34 | Tailwind CSS v4 Setup                           | Not Negotiable  | Frontend           | ✅ Completed |
 |    35 | Tailwind CSS v4 in Existing Projects            | Excellent       | Frontend           | ✅ Completed |
-|    36 | `next/image` Image Optimization                 | Not Negotiable  | Frontend           |  ⏳ Pending  |
+|    36 | `next/image` Image Optimization                 | Not Negotiable  | Frontend           | ✅ Completed |
 |    37 | Preparing App for Deployment                    | Excellent       | Frontend           | ✅ Completed |
 |    38 | Environment Variables                           | Excellent       | Frontend           | ✅ Completed |
 |    39 | Custom Domain Setup                             | Good to Know    | Frontend           |   Skipping   |
